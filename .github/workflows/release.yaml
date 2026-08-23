@@ -33,7 +33,7 @@ jobs:
           for chart in charts/*/; do
             name=$(basename "$chart")
             version=$(grep '^version:' "$chart/Chart.yaml" | awk '{print $2}')
-            if [ -f "dist/charts/${name}-${version}.tgz" ]; then
+            if [ -f "dist/releases/${name}-${version}.tgz" ]; then
               echo "::error::${name}-${version} already released — bump the version in Chart.yaml"
               exit 1
             fi
@@ -43,16 +43,16 @@ jobs:
 
       - name: Lint and package all charts
         run: |
-          mkdir -p dist/charts
+          mkdir -p dist/releases
           for chart in charts/*/; do
             helm lint "$chart"
-            helm package "$chart" -d dist/charts
+            helm package "$chart" -d dist/releases
           done
 
       - name: Rebuild index from repo state (no network fetch)
         run: |
-          helm repo index dist/charts --url https://charts.joshc.uk/charts
-          mv dist/charts/index.yaml dist/index.yaml
+          helm repo index dist/releases --url https://charts.joshc.uk/charts
+          mv dist/releases/index.yaml dist/index.yaml
 
       - name: Capture authorship from triggering commit
         id: author
