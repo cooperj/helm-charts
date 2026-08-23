@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
     paths: ['charts/**']
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Skip the already-released version guard'
+        type: boolean
+        default: false
 
 concurrency:
   group: chart-release
@@ -21,6 +27,7 @@ jobs:
 
       - name: Fail if any version already exists
         id: guard
+        if: ${{ !inputs.force }}
         run: |
           released=""
           for chart in charts/*/; do
