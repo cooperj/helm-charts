@@ -3,12 +3,12 @@ entries:
   hello-container:
   - apiVersion: v2
     appVersion: "1.1"
-    created: "2026-08-23T20:45:48.281734952Z"
+    created: "2026-08-23T20:52:42.070387688Z"
     description: A Helm chart for deploying ghcr.io/cooperj/hello-container
-    digest: c4bba44ef72aa6e47ec0cbe8201a36d48f7b02fd83de7b28281b411ea66b13ad
+    digest: 4250d618c05b6a12bdcfe4855fa3c1cfe874184ed769e8a1304a35f1e900514b
     name: hello-container
     type: application
     urls:
     - https://charts.joshc.uk/releases/hello-container-1.0.0.tgz
     version: 1.0.0
-generated: "2026-08-23T20:45:48.281289257Z"
+generated: "2026-08-23T20:52:42.069948997Z"
