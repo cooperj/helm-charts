@@ -7,7 +7,7 @@ on:
 
 concurrency:
   group: chart-release
-  cancel-in-progress: false   # never let two releases race each other
+  cancel-in-progress: false
 
 jobs:
   release:
@@ -18,9 +18,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: azure/setup-helm@v4
-      
+
       - name: Fail if any version already exists
+        id: guard
         run: |
+          released=""
           for chart in charts/*/; do
             name=$(basename "$chart")
             version=$(grep '^version:' "$chart/Chart.yaml" | awk '{print $2}')
@@ -28,7 +30,9 @@ jobs:
               echo "::error::${name}-${version} already released — bump the version in Chart.yaml"
               exit 1
             fi
+            released="$released ${name}@${version}"
           done
+          echo "released=$released" >> "$GITHUB_OUTPUT"
 
       - name: Lint and package all charts
         run: |
@@ -37,7 +41,7 @@ jobs:
             helm lint "$chart"
             helm package "$chart" -d dist/charts
           done
-      
+
       - name: Rebuild index from repo state (no network fetch)
         run: |
           helm repo index dist/charts --url https://charts.joshc.uk/charts
