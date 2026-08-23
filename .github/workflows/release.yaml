@@ -24,7 +24,7 @@ jobs:
           for chart in charts/*/; do
             name=$(basename "$chart")
             version=$(grep '^version:' "$chart/Chart.yaml" | awk '{print $2}')
-            if [ -f "dist/${name}-${version}.tgz" ]; then
+            if [ -f "dist/charts/${name}-${version}.tgz" ]; then
               echo "::error::${name}-${version} already released — bump the version in Chart.yaml"
               exit 1
             fi
@@ -35,11 +35,13 @@ jobs:
           mkdir -p dist
           for chart in charts/*/; do
             helm lint "$chart"
-            helm package "$chart" -d dist
+            helm package "$chart" -d dist/charts
           done
       
       - name: Rebuild index from repo state (no network fetch)
-        run: helm repo index dist --url https://charts.joshc.uk
+        run: |
+          helm repo index dist/charts --url https://charts.joshc.uk
+          mv dist/charts/index.yaml dist/index.yaml
 
       - name: Commit
         run: |
