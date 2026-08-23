@@ -65,6 +65,21 @@ jobs:
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Update README chart table
+        run: |
+          {
+            echo "| Chart | Version | App Version | Description |"
+            echo "|---|---|---|---|"
+            yq -o=json '.entries' dist/index.yaml \
+              | jq -r 'to_entries[] | .value[0] | "| \(.name) | \(.version) | \(.appVersion) | \(.description // "") |"' \
+              | sort
+          } > /tmp/chart-table.md
+
+          awk -v table="$(cat /tmp/chart-table.md)" '
+            /<!-- charts:start -->/ { print; print table; skip=1; next }
+            /<!-- charts:end -->/ { skip=0 }
+            !skip
+          ' README.md > README.md.tmp && mv README.md.tmp README.md
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
