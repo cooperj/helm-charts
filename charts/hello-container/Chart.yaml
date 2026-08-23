@@ -1,0 +1,6 @@
+apiVersion: v2
+name: hello-container
+description: A Helm chart for deploying ghcr.io/cooperj/hello-container
+type: application
+version: 0.1.0
+appVersion: "1.1"

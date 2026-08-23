@@ -1,0 +1,50 @@
+name: Release Charts
+
+on:
+  push:
+    branches: [main]
+    paths: ['charts/**']
+
+concurrency:
+  group: chart-release
+  cancel-in-progress: false   # never let two releases race each other
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/setup-helm@v4
+      
+      - name: Fail if any version already exists
+        run: |
+          for chart in charts/*/; do
+            name=$(basename "$chart")
+            version=$(grep '^version:' "$chart/Chart.yaml" | awk '{print $2}')
+            if [ -f "dist/${name}-${version}.tgz" ]; then
+              echo "::error::${name}-${version} already released — bump the version in Chart.yaml"
+              exit 1
+            fi
+          done
+
+      - name: Lint and package all charts
+        run: |
+          mkdir -p dist
+          for chart in charts/*/; do
+            helm lint "$chart"
+            helm package "$chart" -d dist
+          done
+      
+      - name: Rebuild index from repo state (no network fetch)
+        run: helm repo index dist --url https://charts.joshc.uk
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dist
+          git diff --cached --quiet || git commit -m "Release $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push

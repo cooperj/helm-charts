@@ -1,0 +1,44 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/cooperj/hello-container
+  tag: "1.1"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+# All container environment variables are defined here as a simple map,
+# so any of them can be overridden at install time, e.g.:
+#   helm install my-app . --set env.MESSAGE="Hello!"
+# PORT doubles as the container's listening port (used for containerPort
+# and as the default service targetPort below).
+env:
+  NAME: "bob"
+  MESSAGE: "Banana!"
+  PORT: "3000"
+
+service:
+  type: ClusterIP
+  port: 3000
+
+resources: {}
+# resources:
+#   limits:
+#     cpu: 100m
+#     memory: 128Mi
+#   requests:
+#     cpu: 50m
+#     memory: 64Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+
+serviceAccount:
+  create: false
+  annotations: {}
+  name: ""
