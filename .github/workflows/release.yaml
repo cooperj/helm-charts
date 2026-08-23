@@ -51,7 +51,7 @@ jobs:
 
       - name: Rebuild index from repo state (no network fetch)
         run: |
-          helm repo index dist/releases --url https://charts.joshc.uk/charts
+          helm repo index dist/releases --url https://charts.joshc.uk/releases
           mv dist/releases/index.yaml dist/index.yaml
 
       - name: Capture authorship from triggering commit
