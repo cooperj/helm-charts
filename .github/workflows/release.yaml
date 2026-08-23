@@ -32,7 +32,7 @@ jobs:
 
       - name: Lint and package all charts
         run: |
-          mkdir -p dist
+          mkdir -p dist/charts
           for chart in charts/*/; do
             helm lint "$chart"
             helm package "$chart" -d dist/charts
@@ -40,13 +40,27 @@ jobs:
       
       - name: Rebuild index from repo state (no network fetch)
         run: |
-          helm repo index dist/charts --url https://charts.joshc.uk
+          helm repo index dist/charts --url https://charts.joshc.uk/charts
           mv dist/charts/index.yaml dist/index.yaml
+
+      - name: Capture authorship from triggering commit
+        id: author
+        run: |
+          {
+            echo "main=$(git log -1 --pretty=format:'%an <%ae>')"
+            echo "trailers<<EOF"
+            git log -1 --pretty=%B | grep '^Co-authored-by:' || true
+            echo "Co-authored-by: $(git log -1 --pretty=format:'%an <%ae>')"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add dist
-          git diff --cached --quiet || git commit -m "Release $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git diff --cached --quiet && exit 0
+          git commit --author="${{ steps.author.outputs.main }}" \
+            -m "Release:${{ steps.guard.outputs.released }}" \
+            -m "${{ steps.author.outputs.trailers }}"
           git push
