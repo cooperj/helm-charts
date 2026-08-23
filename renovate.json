@@ -2,5 +2,31 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
-  ]
+  ],
+  "dependencyDashboard": true,
+  "timezone": "Europe/London",
+  "schedule": [
+    "after 1pm on tuesday, thursday and saturday"
+  ],
+  "helm-values": {
+    "fileMatch": [
+      "charts/.+/values\\.yaml$"
+    ]
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions",
+      "automerge": false
+    }
+  ],
+  "postUpgradeTasks": {
+    "commands": [
+      "yq -i '.version |= (split(\".\") as $v | \"\\($v[0]).\\($v[1]).\\(($v[2] | tonumber) + 1)\")' {{{packageFileDir}}}/Chart.yaml"
+    ],
+    "fileFilters": [
+      "charts/*/Chart.yaml"
+    ],
+    "executionMode": "branch"
+  }
 }
