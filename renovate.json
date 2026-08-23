@@ -9,8 +9,8 @@
     "after 1pm on tuesday, thursday and saturday"
   ],
   "helm-values": {
-    "fileMatch": [
-      "charts/.+/values\\.yaml$"
+    "managerFilePatterns": [
+      "/charts/.+/values\\.yaml$/"
     ]
   },
   "packageRules": [
