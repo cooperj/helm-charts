@@ -16,6 +16,7 @@ env:
   NAME: "My Cluster"
   MESSAGE: "Overide the values for this helm chart to configure what is outputted here!"
   PORT: "3000"
+  EMOJI: "🤖"
 
 service:
   type: ClusterIP
