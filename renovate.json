@@ -6,7 +6,7 @@
   "dependencyDashboard": true,
   "timezone": "Europe/London",
   "schedule": [
-    "after 1pm on tuesday, thursday and saturday"
+    "at any time"
   ],
   "helm-values": {
     "managerFilePatterns": [
