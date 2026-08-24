@@ -3,17 +3,24 @@ entries:
   hello-container:
   - apiVersion: v2
     appVersion: "1.2"
-    created: "2026-08-24T15:06:00.02008119Z"
+    created: "2026-08-24T15:38:06.335459912Z"
     description: A Helm chart for deploying ghcr.io/cooperj/hello-container
-    digest: adb17ce4dde59040ee2ba6f72e0c11ec2dee013ff19a7ae00e25cfbdb43f5473
+    digest: 327cd01439e9064f3258ded76bfe7604a38a1df188e77b9613894e5ecdfc2e6e
+    home: https://github.com/cooperj/hello-container
+    maintainers:
+    - email: hi@joshc.uk
+      name: Josh Cooper
+      url: https://www.joshc.uk
     name: hello-container
+    sources:
+    - https://github.com/cooperj/hello-container
     type: application
     urls:
     - https://charts.joshc.uk/releases/hello-container-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v2
     appVersion: "1.1"
-    created: "2026-08-24T15:06:00.019782579Z"
+    created: "2026-08-24T15:38:06.335016959Z"
     description: A Helm chart for deploying ghcr.io/cooperj/hello-container
     digest: 0b632a576b3f948dfde56e638497d3af87f777acec9a4efd0c81430dfe09b43f
     name: hello-container
@@ -21,4 +28,4 @@ entries:
     urls:
     - https://charts.joshc.uk/releases/hello-container-1.0.0.tgz
     version: 1.0.0
-generated: "2026-08-24T15:06:00.019353815Z"
+generated: "2026-08-24T15:38:06.334572965Z"
