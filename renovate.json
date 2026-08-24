@@ -19,14 +19,15 @@
       "groupName": "GitHub Actions",
       "automerge": false
     }
-  ],
-  "postUpgradeTasks": {
-    "commands": [
-      "yq -i '.version |= (split(\".\") as $v | \"\\($v[0]).\\($v[1]).\\(($v[2] | tonumber) + 1)\")' {{{packageFileDir}}}/Chart.yaml"
-    ],
-    "fileFilters": [
-      "charts/*/Chart.yaml"
-    ],
-    "executionMode": "branch"
-  }
+  ]
+  // ,
+  // "postUpgradeTasks": {
+  //   "commands": [
+  //     "yq -i '.version |= (split(\".\") as $v | \"\\($v[0]).\\($v[1]).\\(($v[2] | tonumber) + 1)\")' {{{packageFileDir}}}/Chart.yaml"
+  //   ],
+  //   "fileFilters": [
+  //     "charts/*/Chart.yaml"
+  //   ],
+  //   "executionMode": "branch"
+  // }
 }
