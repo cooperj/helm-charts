@@ -9,92 +9,32 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/media/favicons/16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/media/favicons/180.png">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #171717;
-            --text: #ffffff;
-            --accent: #ff4d4d;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            padding: 2rem;
-            background: var(--bg);
-            color: var(--text);
-            text-align: center;
-            font-family: system-ui, sans-serif;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: bold;
-            background: linear-gradient(90deg,
-                    #ff0000,
-                    #ff7f00,
-                    #ffff00,
-                    #00ff00,
-                    #00bfff,
-                    #4b0082,
-                    #9400d3);
-            background-size: 300% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: rainbow 5s linear infinite;
-        }
-
-        a {
-            display: inline-block;
-            padding: 0.9rem 2rem;
-            border: 2px solid #ffffff33;
-            border-radius: 999px;
-            background: #2b2b2b;
-            color: var(--text);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-        }
-
-        a:hover,
-        a:focus-visible {
-            background: #3a3a3a;
-            border-color: #ffffff66;
-            transform: translateY(-2px);
-        }
-
-        a:active {
-            transform: translateY(0);
-        }
-
-        @keyframes rainbow {
-            from {
-                background-position: 0% 50%;
-            }
-
-            to {
-                background-position: 300% 50%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/media/styles.css">
 </head>
 
 <body>
-    <h1>Josh's Helm Charts</h1>
-    <a href="https://github.com/cooperj/helm-charts" target="_blank" rel="noopener noreferrer">Open Repo</a>
-    <a href="/index.yaml">Open Index</a>
+    <div class="box">
+        <h1>Josh's Helm Charts</h1>
+    </div>
+    <div class="box">
+        <a href="https://github.com/cooperj/helm-charts" target="_blank" rel="noopener noreferrer" class="action" tabindex="0">Open Repo</a>
+        <a href="/index.yaml" class="action" tabindex="0">Open Index</a>
+    </div>
+    <div class="box">
+        
+        <strong>
+            Getting started couldn't be easier, just run the following commands to start using my charts.
+        </strong>
+        
+    </div>
+    <div class="box">
+        <div class="command-list" aria-label="Helm repository commands">
+            <div class="action command-layer" tabindex="0"><code>helm repo add joshc https://charts.joshc.uk</code></div>
+            <div class="action command-layer" tabindex="0"><code>helm repo update</code></div>
+            <div class="action command-layer" tabindex="0"><code>helm search repo joshc</code></div>
+        </div>
+    </div>
+    <script src="/media/copy.js" defer></script>
 </body>
 
 </html>
