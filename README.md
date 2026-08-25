@@ -1,6 +1,6 @@
 # Josh's Helm Charts
 
-This is my collection of random helm charts for things that are for projects I have built or other things I want to host in my [Homelab](https://joshc.uk/tags/homelab?ref=helm-charts-repo) but I have not found a chart I am happy with. Feel free to use these charts, but be aware they're provided as-is.
+This is my collection of random Helm charts for things that are for projects I have built or other things I want to host in my [Homelab](https://joshc.uk/tags/homelab?ref=helm-charts-repo) but I have not found a chart I am happy with. Feel free to use these charts, but be aware they're provided as-is.
 
 ## Getting Started
 
@@ -23,7 +23,7 @@ helm search repo joshc --versions
 Use a release name and target namespace:
 
 ```
-helm install my-release joshc/my-container --namespace my-namespace --create-namespace
+helm install my-release joshc/hello-container --namespace my-namespace --create-namespace
 ```
 
 **Upgrade an existing release**
@@ -50,9 +50,9 @@ Install with overrides:
 
 ```
 helm install my-release joshc/hello-container \
-	--namespace hello-container \
-	--create-namespace \
-	--set image.tag=1.2
+  --namespace hello-container \
+  --create-namespace \
+  --set image.tag=1.2
 ```
 
 Install with a values file:
