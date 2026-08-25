@@ -1,0 +1,113 @@
+:root {
+    --bg: #171717;
+    --text: #ffffff;
+    --rainbow: linear-gradient(90deg,
+            #ff0000,
+            #ff7f00,
+            #ffff00,
+            #00ff00,
+            #00bfff,
+            #4b0082,
+            #9400d3);
+    --action-bg: #2b2b2b;
+    --action-border: #ffffff33;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--bg);
+    color: var(--text);
+    text-align: center;
+}
+
+h1 {
+    font-size: clamp(3rem, 8vw, 15rem);
+    font-weight: bolder;
+    background: var(--rainbow);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow 5s linear infinite;
+}
+
+.action {
+    color: var(--text);
+    background: var(--action-bg);
+    border: 2px solid var(--action-border);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.action:hover,
+.action:focus-visible {
+    background: #3a3a3a;
+    border-color: #ffffff66;
+    transform: translateY(-1px);
+}
+
+.action:active {
+    transform: translateY(0);
+}
+
+.box {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.command-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: min(880px, 90vw);
+}
+
+.command-layer {
+    position: relative;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    cursor: text;
+    user-select: text;
+}
+
+.completed {
+    background: #00ff00;
+    color: var(--bg);
+}
+
+a {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@keyframes rainbow {
+    from {
+        background-position: 0% 50%;
+    }
+
+    to {
+        background-position: 300% 50%;
+    }
+}
