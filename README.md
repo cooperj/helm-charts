@@ -18,24 +18,27 @@ helm search repo joshc
 helm search repo joshc --versions
 ```
 
+> [!NOTE]
+> For the rest of this example we will be running my example web server container, `hello-container`. This provides a very simple web server with text values that can be overridden with environment variables or chart values.
+
 **Install a chart**
 
 Use a release name and target namespace:
 
 ```
-helm install my-release joshc/hello-container --namespace my-namespace --create-namespace
+helm install hello-container joshc/hello-container --namespace hello-container --create-namespace
 ```
 
 **Upgrade an existing release**
 
 ```
-helm upgrade my-release joshc/my-container --namespace my-namespace
+helm upgrade hello-container joshc/hello-container --namespace hello-container
 ```
 
 **Uninstall a release**
 
 ```
-helm uninstall my-release --namespace my-namespace
+helm uninstall hello-container --namespace hello-container
 ```
 
 **Customize values**
@@ -49,7 +52,7 @@ helm show values joshc/hello-container
 Install with overrides:
 
 ```
-helm install my-release joshc/hello-container \
+helm install hello-container joshc/hello-container \
   --namespace hello-container \
   --create-namespace \
   --set image.tag=1.2
@@ -58,7 +61,7 @@ helm install my-release joshc/hello-container \
 Install with a values file:
 
 ```
-helm install my-release joshc/hello-container -f values.yaml --namespace hello-container --create-namespace
+helm install hello-container joshc/hello-container -f values.yaml --namespace hello-container --create-namespace
 ```
 
 ## Provided Charts
