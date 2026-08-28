@@ -69,5 +69,5 @@ helm install hello-container joshc/hello-container -f values.yaml --namespace he
 <!-- charts:start -->
 | Chart | Version | App Version | Description |
 |---|---|---|---|
-| hello-container | 1.2.0 | 1.2 | A Helm chart for deploying ghcr.io/cooperj/hello-container |
+| hello-container | 1.2.1 | 1.2.1 | A Helm chart for deploying ghcr.io/cooperj/hello-container |
 <!-- charts:end -->
