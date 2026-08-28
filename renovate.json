@@ -8,11 +8,6 @@
   "schedule": [
     "at any time"
   ],
-  "helm-values": {
-    "managerFilePatterns": [
-      "/charts/.+/values\\.yaml$/"
-    ]
-  },
   "customManagers": [
     {
       "customType": "regex",
