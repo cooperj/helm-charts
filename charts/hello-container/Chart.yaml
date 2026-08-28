@@ -2,7 +2,7 @@ apiVersion: v2
 name: hello-container
 description: A Helm chart for deploying ghcr.io/cooperj/hello-container
 type: application
-version: 1.2.0      # renovate: datasource=docker depName=ghcr.io/cooperj/hello-container
+version: 1.2.1      # renovate: datasource=docker depName=ghcr.io/cooperj/hello-container
 appVersion: "1.2"   # renovate: datasource=docker depName=ghcr.io/cooperj/hello-container
 home: https://github.com/cooperj/hello-container
 sources: 
