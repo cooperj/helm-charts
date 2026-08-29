@@ -8,11 +8,6 @@
   "schedule": [
     "at any time"
   ],
-  "helm-values": {
-    "managerFilePatterns": [
-      "/charts/.+/values\\.yaml$/"
-    ]
-  },
   "customManagers": [
     {
       "customType": "regex",
@@ -31,6 +26,17 @@
       ],
       "groupName": "GitHub Actions",
       "automerge": false
+    },
+    {
+      "matchFileNames": ["charts/*/Chart.yaml"],
+      "matchDatasources": ["docker"],
+      "bumpVersions": [
+        {
+          "filePatterns": ["{{packageFileDir}}/Chart.yaml"],
+          "matchStrings": ["^version:\\s(?<version>[^\\s]+)"],
+          "bumpType": "{{updateType}}"
+        }
+      ]
     }
   ]
 }

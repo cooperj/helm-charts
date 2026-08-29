@@ -2,7 +2,6 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/cooperj/hello-container
-  tag: "1.2"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
